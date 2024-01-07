@@ -1,6 +1,7 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:showcase/add_page.dart';
 import 'package:showcase/controller.dart';
 import 'package:showcase/remove_page.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -14,12 +15,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final showCaseController = Get.put(ShowCaseController());
+  final AudioPlayer audioPlayer = AudioPlayer();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showCaseController.showCaseHomePage(context),
+    );
+  }
+
+  Future<void> _playAudioFromAsset() async {
+    const assetPath = "assets/music/Notification.mp3";
+    final assetsAudioPlayer = AssetsAudioPlayer();
+    assetsAudioPlayer.open(
+      Audio(assetPath),
     );
   }
 
@@ -41,10 +51,15 @@ class _HomePageState extends State<HomePage> {
               description:
                   "Tap to see profile which contains user's name, profile picture, mobile number and country",
               tooltipBackgroundColor: Theme.of(context).primaryColor,
+              disposeOnTap: true,
+              onTargetClick: () => print('profile'),
               textColor: Colors.white,
               targetShapeBorder: const CircleBorder(),
               child: GestureDetector(
-                onTap: () => Get.to(RemovePage()),
+                onTap: () {
+                  Get.to(() => const RemovePage());
+                  print('object');
+                },
                 child: Container(
                   padding: const EdgeInsets.all(5),
                   width: 45,
@@ -57,18 +72,23 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 200,
+            ),
           ],
         ),
       ),
       floatingActionButton: Showcase(
         key: showCaseController.two,
-        title: 'Compose Mail',
         description: 'Click here to compose mail',
+        disposeOnTap: true,
+        onTargetClick: () => print('Compose Mail'),
         targetShapeBorder: const CircleBorder(),
         child: FloatingActionButton(
           backgroundColor: Theme.of(context).primaryColor,
           onPressed: () {
-            Get.to(AddPage());
+            // Get.to(AddPage());
+            _playAudioFromAsset();
           },
           child: const Icon(
             Icons.add,
@@ -78,3 +98,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+

@@ -13,7 +13,7 @@ class RemovePage extends StatefulWidget {
 class _RemovePageState extends State<RemovePage> {
   final showCaseController = Get.put(ShowCaseController());
 
-   @override
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
@@ -30,9 +30,25 @@ class _RemovePageState extends State<RemovePage> {
             key: showCaseController.four,
             title: 'Compose Mail',
             description: 'Click here to compose mail',
+            disposeOnTap: true,
+            onTargetClick: () => print('profile'),
+            targetShapeBorder: const CircleBorder(),
+            child: ElevatedButton(onPressed: () {}, child: Text("Hello"))),
+        SizedBox(
+          height: 200,
+        ),
+        Showcase(
+            key: showCaseController.five,
+            disposeOnTap: true,
+            // disableDefaultTargetGestures: true,
+
+            onTargetClick: () => print('profile'),
+            title: 'hello',
+            description: 'Click here to compose mail',
             targetShapeBorder: const CircleBorder(),
             child: ElevatedButton(onPressed: () {}, child: Text("Hello"))),
       ]),
     );
   }
 }
+

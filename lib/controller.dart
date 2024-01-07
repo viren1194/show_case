@@ -50,6 +50,15 @@ class ShowCaseController extends GetxController {
   final GlobalKey two = GlobalKey();
   final GlobalKey three = GlobalKey();
   final GlobalKey four = GlobalKey();
+  final GlobalKey five = GlobalKey();
+
+  Map<String, GlobalKey> keys = {
+    'one': GlobalKey(),
+    'two': GlobalKey(),
+    'three': GlobalKey(),
+    'four': GlobalKey(),
+    'five': GlobalKey(),
+  };
 
   void _showCase(
       BuildContext context, List<GlobalKey> keys, String showcaseKey) async {
@@ -71,6 +80,26 @@ class ShowCaseController extends GetxController {
   }
 
   void showCaseRemovePage(BuildContext context) {
-    _showCase(context, [four], 'removePage');
+    _showCase(context, [four, five], 'removePage');
+  }
+    List<String> unit = ['cm', 'gm', 'ltr', 'mtr'];
+
+  RxString selectedValue = ''.obs;
+
+  void updateValue(String value) {
+    selectedValue = value.obs;
+    // update();
+  }
+
+    Future<void> loadSelectedValue() async {
+    final prefs = await SharedPreferences.getInstance();
+    // setState(() {
+    selectedValue.value = prefs.getString('selectedValue') ?? '';
+    // });
+  }
+
+    Future<void> saveSelectedValue(String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedValue', value);
   }
 }

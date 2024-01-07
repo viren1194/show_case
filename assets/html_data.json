@@ -1,0 +1,15 @@
+[
+    {
+      "key": "addItemInChallan",
+      "htmlContent": "<div><h2>How to Add Item in Challan?</h2><p>Select Product, Select Unit, Enter Quantity, Enter Rate</p></div>",
+      "language": "en"
+    },
+    {
+      "key": "pdfGenerated",
+      "htmlContent": "<h2>PDF Generated with flutter_html_to_pdf plugin</h2><p>Sample HTML content</p>",
+      "language": "en"
+    }
+  ]
+
+
+  
